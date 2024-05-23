@@ -4,7 +4,7 @@ import CinemaInput from "../../component/cinema-input";
 const HomePage = () => {
   return (
     <>
-      <CinemaButton variant="primary" size="small" shape="round">
+      {/* <CinemaButton variant="primary" size="small" shape="round">
         small
       </CinemaButton>
       <CinemaButton variant="secondary" size="medium" shape="shape">
@@ -15,7 +15,7 @@ const HomePage = () => {
       </CinemaButton>
       <CinemaInput variant="white" size="small" shape="default" />
       <CinemaInput variant="white" size="medium" shape="default" />
-      <CinemaInput variant="white" size="large" shape="default" />
+      <CinemaInput variant="white" size="large" shape="default" /> */}
     </>
   );
 };
