@@ -46,6 +46,8 @@ const shapeCSS = {
 };
 
 const Input = styled.input<InputProps>`
+  color: ${({ theme }) => theme.COLORS.white};
+  font-size: ${({ theme }) => theme.FONT_SIZE.large};
   ${({ variant }) => variantCSS[variant]}
   ${({ size }) => sizeCSS[size]}
   ${({ shape }) => shapeCSS[shape]}
