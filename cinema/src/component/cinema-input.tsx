@@ -10,7 +10,8 @@ export default CinemaInput;
 
 const variantCSS = {
   white: css`
-    border-bottom: 3px solid ${({ theme }) => theme.COLORS.black};
+    background-color: ${({ theme }) => theme.COLORS.primary["purple"]};
+    border-bottom: 2px solid ${({ theme }) => theme.COLORS.white};
   `,
 };
 
@@ -28,7 +29,7 @@ const sizeCSS = {
   large: css`
     width: 360px;
     height: 60px;
-    padding: 14px;
+    padding: 12px 60px 6px 12px;
   `,
 };
 
@@ -48,4 +49,5 @@ const Input = styled.input<InputProps>`
   ${({ variant }) => variantCSS[variant]}
   ${({ size }) => sizeCSS[size]}
   ${({ shape }) => shapeCSS[shape]}
+  outline: none;
 `;

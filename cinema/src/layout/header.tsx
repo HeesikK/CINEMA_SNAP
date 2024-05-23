@@ -1,8 +1,10 @@
-import styled, { keyframes } from "styled-components";
-import Logo from "../assets/CINEMA_SNAP_LOGO.png";
-import SearchIcon from "../assets/search.png";
+import styled from "styled-components";
+import Logo from "../assets/logo/CINEMA_SNAP_LOGO.png";
+import NavySearchIcon from "../assets/icon/Navy Search.png";
+import CloseIcon from "../assets/icon/Close.png";
 import React, { useState } from "react";
 import { flexCenter } from "../style/common.style";
+import SearchModal from "./component/search-modal";
 
 const Header = () => {
   const navbarItems: string[] = ["Now Playing", "Popular", "Top Rated", "Upcoming"];
@@ -22,12 +24,12 @@ const Header = () => {
             {idx === logoIndex && <img src={Logo} width={140} />}
             <NavItem marginLeft={idx >= logoIndex ? "100px" : "0"} marginRight={idx < logoIndex ? "100px" : "0"}>
               {item}
-              {item === "Now Playing" && <SearchImg src={SearchIcon} onClick={openSearchModal} />}
+              {item === "Now Playing" && <SearchImg src={isSearchOpen ? CloseIcon : NavySearchIcon} onClick={openSearchModal} />}
             </NavItem>
           </React.Fragment>
         ))}
       </Navbar>
-      {isSearchOpen && <SearchModal>안녕하세요</SearchModal>}
+      {isSearchOpen && <SearchModal />}
     </>
   );
 };
@@ -49,7 +51,6 @@ const Navbar = styled.div`
 
 const NavItem = styled.span<{ marginLeft: string; marginRight: string }>`
   position: relative;
-  color: ${({ theme }) => theme.COLORS.black};
   font-size: ${({ theme }) => theme.FONT_SIZE.large};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
   margin-left: ${({ marginLeft }) => marginLeft};
@@ -59,27 +60,8 @@ const NavItem = styled.span<{ marginLeft: string; marginRight: string }>`
 const SearchImg = styled.img`
   position: absolute;
   left: -100px;
-  top: -5px;
   color: ${({ theme }) => theme.COLORS.white};
-  width: 40px;
+  width: 25px;
   cursor: pointer;
-`;
-
-const slideDown = keyframes`
-  from {
-    top: -300px; 
-  }
-  to {
-    top: 141px; 
-  }
-`;
-
-const SearchModal = styled.div`
-  width: 100%;
-  height: 300px;
-  background-color: ${({ theme }) => theme.COLORS.primary["purple"]};
-  position: fixed;
-  top: 141px;
-  animation: ${slideDown} 0.5s ease-out;
-  z-index: 999;
+  z-index: 9999;
 `;
