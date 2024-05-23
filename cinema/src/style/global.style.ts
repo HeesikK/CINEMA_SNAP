@@ -10,9 +10,10 @@ ${reset}
 body{
   background-color: #FFFFFF,
 }
-button{
+button,input{
   border: none;
 }
+
 `;
 
 export default GlobalStyles;

@@ -27,18 +27,18 @@ const variantCSS = {
 
 const sizeCSS = {
   small: css`
-    width: 100px;
-    height: 40px;
+    width: 150px;
+    height: 50px;
     font-size: ${({ theme }) => theme.FONT_SIZE.small};
   `,
   medium: css`
-    width: 120px;
-    height: 48px;
+    width: 180px;
+    height: 60px;
     font-size: ${({ theme }) => theme.FONT_SIZE.medium};
   `,
   large: css`
-    width: 160px;
-    height: 64px;
+    width: 210px;
+    height: 70px;
     font-size: ${({ theme }) => theme.FONT_SIZE.large};
   `,
 };
