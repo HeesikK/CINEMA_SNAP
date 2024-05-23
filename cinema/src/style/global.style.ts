@@ -8,7 +8,8 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
   body {
-    background-color: #FFFFFF;
+    width: 100%;
+    background-color: ${({ theme }) => theme.COLORS.primary["yellow"]};
   }
   button, input {
     border: none;
