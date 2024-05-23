@@ -1,5 +1,6 @@
 const COLORS = {
   primary: {
+    navy: "#100D45",
     yellow: "#fdffeb",
     purple: "#ede0ff",
     logo: "#232054",
@@ -19,11 +20,9 @@ const COLORS = {
 };
 
 const FONT_SIZE = {
-  extraSmall: "14px",
   small: "16px",
   medium: "18px",
   large: "20px",
-  extraLarge: "32px",
 };
 
 const FONT_WEIGHT = {
