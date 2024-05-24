@@ -80,7 +80,7 @@ const NavItem = styled.span`
 
 const SearchImg = styled.img`
   position: absolute;
-  left: 200px;
+  left: 205px;
   top: 60px;
   color: ${({ theme }) => theme.COLORS.white};
   width: 25px;

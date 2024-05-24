@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { flexCenter } from "./common.style";
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
@@ -9,12 +10,10 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     width: 100%;
-    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+    min-height: 100vh; 
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${flexCenter}
     background-color: ${({ theme }) => theme.COLORS.primary["yellow"]};
   }
   button, input {
