@@ -3,6 +3,7 @@ import { FC } from "react";
 import { flexCenter } from "../style/common.style";
 import AllIcon from "../assets/icon/ALL.png";
 import NineteenIcon from "../assets/icon/19.png";
+import { useNavigate } from "react-router-dom";
 
 type MovieData = {
   title: string;
@@ -14,10 +15,15 @@ type MovieData = {
 };
 
 const OneMovie: FC<MovieData> = ({ title, id, poster, rate, overview, adult }) => {
+  const navigate = useNavigate();
   const moviePoster = `https://image.tmdb.org/t/p/original${poster}`;
 
+  const goToDetailPage = () => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
-    <Container>
+    <Container onClick={goToDetailPage}>
       <Wrapper style={{ backgroundImage: `url(${moviePoster})` }}>
         <Overlay>
           <Content>
