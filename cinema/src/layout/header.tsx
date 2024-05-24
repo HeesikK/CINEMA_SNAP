@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <Container>
       <Navbar>
         <SearchImg src={isSearchOpen ? CloseIcon : NavySearchIcon} onClick={openSearchModal} />
         {navbarItems.map((item: string, idx: number) => (
@@ -46,16 +46,20 @@ const Header = () => {
       </Navbar>
       {isSearchOpen && <SearchModal />}
       {isOpenMobileMenu && <MobileMenuModal navbarItems={navbarItems} />}
-    </>
+    </Container>
   );
 };
 
 export default Header;
 
+const Container = styled.div`
+  ${flexCenter}
+`;
+
 const Navbar = styled.div`
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   ${flexCenter}
   & > * {
     cursor: pointer;
