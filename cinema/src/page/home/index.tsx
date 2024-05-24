@@ -1,5 +1,4 @@
 import MovieList from "./component/movie-list";
-// gi
 
 const HomePage = () => {
   return (
