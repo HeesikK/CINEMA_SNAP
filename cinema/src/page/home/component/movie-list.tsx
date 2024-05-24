@@ -7,11 +7,7 @@ import { Movie } from "../../../type/movie-type";
 import { getHomePageMovieList } from "../../../api/api";
 
 const MovieList = () => {
-  const {
-    data: movieList,
-    fetchNextPage,
-    isFetching,
-  } = useInfiniteQuery({
+  const { data: movieList, fetchNextPage } = useInfiniteQuery({
     queryKey: ["movieList"],
     queryFn: ({ pageParam = 1 }) => getHomePageMovieList(pageParam),
     getNextPageParam: (lastPage) => {
@@ -27,7 +23,7 @@ const MovieList = () => {
   return (
     <CinemaContainer>
       <Grid container spacing={2}>
-        {movieList?.pages.map((page, idx) => {
+        {movieList?.pages.map((page) => {
           const movieList = page.results;
           return movieList?.map((movie: Movie) => (
             <CinemaGrid item xs={6} md={3} key={movie.id}>
