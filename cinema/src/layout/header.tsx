@@ -32,7 +32,12 @@ const Header = () => {
         {navbarItems.map((item: string, idx: number) => (
           <React.Fragment key={idx}>
             {idx === logoIndex && <img src={Logo} width={140} />}
-            <NavItem marginLeft={idx >= logoIndex ? "100px" : "0"} marginRight={idx < logoIndex ? "100px" : "0"}>
+            <NavItem
+              style={{
+                marginLeft: idx >= logoIndex ? "100px" : "0",
+                marginRight: idx < logoIndex ? "100px" : "0",
+              }}
+            >
               {item}
             </NavItem>
           </React.Fragment>
@@ -58,16 +63,12 @@ const Navbar = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.gray[300]};
   background-color: ${({ theme }) => theme.COLORS.primary["yellow"]};
   z-index: 1000;
-  & > span {
-  }
 `;
 
-const NavItem = styled.span<{ marginLeft: string; marginRight: string }>`
+const NavItem = styled.span`
   position: relative;
   font-size: ${({ theme }) => theme.FONT_SIZE.large};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
-  margin-left: ${({ marginLeft }) => marginLeft};
-  margin-right: ${({ marginRight }) => marginRight};
   @media ${({ theme }) => theme.DEVICE.mobile} {
     display: none;
   }

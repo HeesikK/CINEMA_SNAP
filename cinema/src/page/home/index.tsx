@@ -1,22 +1,16 @@
-import CinemaButton from "../../component/cinema-button";
-import CinemaInput from "../../component/cinema-input";
+import { useQuery } from "react-query";
+import { getHomePageMovieList } from "../../api/api";
 
 const HomePage = () => {
+  const { data: MovieList } = useQuery("movieList", () => getHomePageMovieList());
+  console.log(MovieList);
+
   return (
-    <>
-      {/* <CinemaButton variant="primary" size="small" shape="round">
-        small
-      </CinemaButton>
-      <CinemaButton variant="secondary" size="medium" shape="shape">
-        medium
-      </CinemaButton>
-      <CinemaButton variant="secondary" size="large" shape="default">
-        large
-      </CinemaButton>
-      <CinemaInput variant="white" size="small" shape="default" />
-      <CinemaInput variant="white" size="medium" shape="default" />
-      <CinemaInput variant="white" size="large" shape="default" /> */}
-    </>
+    <div>
+      {/* {MovieList.map((movie) => (
+        <div key={movie.id}>{movie.title}</div>
+      ))} */}
+    </div>
   );
 };
 
