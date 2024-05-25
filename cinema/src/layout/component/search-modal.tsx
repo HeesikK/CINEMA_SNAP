@@ -1,17 +1,22 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import CinemaInput from "../../component/cinema-input";
 import WhiteSearchIcon from "../../assets/icon/White Search.png";
 import { useQuery } from "react-query";
 import { getTopMovieList } from "../../api/api";
 import { flexCenter } from "../../style/common.style";
+import { useNavigate } from "react-router-dom";
 
-const SearchModal = () => {
+type searchModalProps = {
+  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
   const { data: movieList } = useQuery(["topFiveMovieList"], () => getTopMovieList());
   const [hoveredMovie, setHoveredMovie] = useState(null);
+  const navigate = useNavigate();
 
   const topFiveMovies = movieList?.results?.slice(0, 5) || [];
-  console.log(topFiveMovies);
 
   useEffect(() => {
     if (topFiveMovies.length > 0 && !hoveredMovie) {
@@ -28,7 +33,14 @@ const SearchModal = () => {
             <MovieItem key={movie.id} onMouseEnter={() => setHoveredMovie(movie)} onMouseLeave={() => setHoveredMovie(topFiveMovies[0])}>
               <p>
                 <MovieNumber>{index + 1}</MovieNumber>
-                <MovieTitle>{movie.title}</MovieTitle>
+                <MovieTitle
+                  onClick={() => {
+                    setIsSearchOpen(false);
+                    navigate(`/detail/${movie.id}`);
+                  }}
+                >
+                  {movie.title}
+                </MovieTitle>
               </p>
             </MovieItem>
           ))}

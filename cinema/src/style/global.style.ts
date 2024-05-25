@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     ${flexCenter}
-    background-color: ${({ theme }) => theme.COLORS.primary["yellow"]};
+    background-color: ${({ theme }) => theme.COLORS.white};
   }
   button, input {
     border: none;

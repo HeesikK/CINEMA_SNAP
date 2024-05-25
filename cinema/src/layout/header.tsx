@@ -51,7 +51,7 @@ const Header = () => {
         ))}
         <MenuImg src={MenuIcon} onClick={openMenu} />
       </Navbar>
-      {isSearchOpen && <SearchModal />}
+      {isSearchOpen && <SearchModal setIsSearchOpen={setIsSearchOpen} />}
       {isOpenMobileMenu && <MobileMenuModal navbarItems={navbarItems} />}
     </Container>
   );
@@ -72,7 +72,7 @@ const Navbar = styled.div`
     cursor: pointer;
   }
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.gray[300]};
-  background-color: ${({ theme }) => theme.COLORS.primary["yellow"]};
+  background-color: ${({ theme }) => theme.COLORS.white};
   z-index: 1000;
 `;
 
