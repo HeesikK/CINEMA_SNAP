@@ -30,6 +30,8 @@ const MovieList = () => {
     },
   });
 
+  console.log(movieList);
+
   return (
     <CinemaContainer>
       {isLoading ? (
@@ -42,7 +44,7 @@ const MovieList = () => {
             const movieList = page.results;
             return movieList?.map((movie: Movie) => (
               <CinemaGrid item xs={6} md={3} key={movie.id}>
-                <OneMovie title={movie.title} id={movie.id} poster={movie.poster_path} rate={movie.vote_average} overview={movie.overview} adult={movie.adult} />
+                <OneMovie title={movie.title} id={movie.id} poster_path={movie.poster_path} vote_average={movie.vote_average} overview={movie.overview} adult={movie.adult} />
               </CinemaGrid>
             ));
           })}

@@ -4,19 +4,11 @@ import { flexCenter } from "../style/common.style";
 import AllIcon from "../assets/icon/ALL.png";
 import NineteenIcon from "../assets/icon/19.png";
 import { useNavigate } from "react-router-dom";
+import { PartialMovie } from "../type/movie-type";
 
-type MovieData = {
-  title: string;
-  id: number;
-  poster: string;
-  rate: number;
-  overview: string;
-  adult: boolean;
-};
-
-const OneMovie: FC<MovieData> = ({ title, id, poster, rate, overview, adult }) => {
+const OneMovie: FC<PartialMovie> = ({ title, id, poster_path, vote_average, overview, adult }) => {
   const navigate = useNavigate();
-  const moviePoster = `https://image.tmdb.org/t/p/original${poster}`;
+  const moviePoster = `https://image.tmdb.org/t/p/original${poster_path}`;
 
   const goToDetailPage = () => {
     navigate(`/detail/${id}`);
@@ -29,7 +21,7 @@ const OneMovie: FC<MovieData> = ({ title, id, poster, rate, overview, adult }) =
           <Content>
             <Overview>{overview}</Overview>
             <Divider />
-            <Rate>⭐ {Math.ceil(rate * 10) / 10}</Rate>
+            {vote_average !== undefined && <Rate>⭐ {Math.ceil(vote_average * 10) / 10}</Rate>}
           </Content>
         </Overlay>
       </Wrapper>

@@ -41,5 +41,6 @@ const Container = styled.div`
 
 const MenuItem = styled.div`
   cursor: pointer;
+  color: ${({ theme }) => theme.COLORS.white};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
 `;

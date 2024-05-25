@@ -12,3 +12,5 @@ export type Movie = {
   vote_count: number;
   adult: boolean;
 };
+
+export type PartialMovie = Partial<Movie>;
