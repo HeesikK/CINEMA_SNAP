@@ -5,8 +5,14 @@ import { flexCenter } from "../../../style/common.style";
 import OneMovie from "../../../component/one-movie";
 import { Movie } from "../../../type/movie-type";
 import { getHomePageMovieList } from "../../../api/api";
+import { useParams } from "react-router-dom";
 
 const MovieList = () => {
+  const param = useParams();
+
+  let paramKeyword = !param.movie ? "popular" : param.movie;
+  console.log(paramKeyword);
+
   const { data: movieList, fetchNextPage } = useInfiniteQuery({
     queryKey: ["movieList"],
     queryFn: ({ pageParam = 1 }) => getHomePageMovieList(pageParam),

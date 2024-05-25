@@ -7,8 +7,10 @@ import React, { useState } from "react";
 import { flexCenter } from "../style/common.style";
 import SearchModal from "./component/search-modal";
 import MobileMenuModal from "./component/mobile-menu";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const navbarItems: string[] = ["Now Playing", "Popular", "Top Rated", "Upcoming"];
   const logoIndex = Math.floor(navbarItems.length / 2);
 
@@ -25,14 +27,19 @@ const Header = () => {
     setIsOpenMobileMenu((prev) => !prev);
   };
 
+  const goMovieCategory = (category: string) => {
+    navigate(`/${category.toLowerCase().replace(/ /g, "_")}`);
+  };
+
   return (
     <Container>
       <Navbar>
         <SearchImg src={isSearchOpen ? CloseIcon : NavySearchIcon} onClick={openSearchModal} />
         {navbarItems.map((item: string, idx: number) => (
           <React.Fragment key={idx}>
-            {idx === logoIndex && <img src={Logo} width={140} />}
+            {idx === logoIndex && <img onClick={() => navigate("/")} src={Logo} width={140} />}
             <NavItem
+              onClick={() => goMovieCategory(item)}
               style={{
                 marginLeft: idx >= logoIndex ? "100px" : "0",
                 marginRight: idx < logoIndex ? "100px" : "0",
