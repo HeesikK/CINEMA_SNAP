@@ -6,13 +6,14 @@ import { useQuery } from "react-query";
 import { getTopMovieList } from "../../api/api";
 import { flexCenter } from "../../style/common.style";
 import { useNavigate } from "react-router-dom";
+import { QUERY_KEY } from "../../const/query-key";
 
 type searchModalProps = {
   setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
-  const { data: movieList } = useQuery(["topFiveMovieList"], () => getTopMovieList());
+  const { data: movieList } = useQuery([QUERY_KEY.TopFiveMovieList], () => getTopMovieList());
   const [hoveredMovie, setHoveredMovie] = useState(null);
   const navigate = useNavigate();
 

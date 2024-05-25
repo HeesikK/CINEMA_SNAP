@@ -6,6 +6,7 @@ import OneMovie from "../../../component/one-movie";
 import { Movie } from "../../../type/movie-type";
 import { getHomePageMovieList } from "../../../api/api";
 import { useParams } from "react-router-dom";
+import { QUERY_KEY } from "../../../const/query-key";
 
 const MovieList = () => {
   const param = useParams();
@@ -18,7 +19,7 @@ const MovieList = () => {
     isLoading,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["movieList", paramKeyword],
+    queryKey: [QUERY_KEY.MovieList, paramKeyword],
     queryFn: ({ pageParam = 1 }) => getHomePageMovieList({ paramKeyword, pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
