@@ -23,7 +23,7 @@ type MovieListResponse = {
 };
 
 const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
-  const { data: movieList } = useQuery<MovieListResponse>([QUERY_KEY.TopFiveMovieList], () => getTopMovieList());
+  const { data: movieList } = useQuery<MovieListResponse>([QUERY_KEY.TopFiveMovieList], getTopMovieList);
   const [hoveredMovie, setHoveredMovie] = useState<Movie | null>(null);
   const navigate = useNavigate();
 
@@ -33,12 +33,12 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
     if (topFiveMovies.length > 0 && !hoveredMovie) {
       setHoveredMovie(topFiveMovies[0]);
     }
-  }, [topFiveMovies]);
+  }, [topFiveMovies, hoveredMovie]);
 
   return (
     <Container>
       <TopFiveMovieBox>
-        <MoviePoster>{hoveredMovie && <img src={`https://image.tmdb.org/t/p/original${hoveredMovie.poster_path}`} />}</MoviePoster>
+        <MoviePoster>{hoveredMovie && <img src={`https://image.tmdb.org/t/p/original${hoveredMovie.poster_path}`} alt={hoveredMovie.title} />}</MoviePoster>
         <MoviesList>
           {topFiveMovies.map((movie: Movie, index: number) => (
             <MovieItem key={movie.id} onMouseEnter={() => setHoveredMovie(movie)} onMouseLeave={() => setHoveredMovie(topFiveMovies[0])}>
