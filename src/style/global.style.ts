@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
     min-height: 100vh; 
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
     ${flexCenter}
     background-color: ${({ theme }) => theme.COLORS.white};
   }

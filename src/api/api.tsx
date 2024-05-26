@@ -14,3 +14,8 @@ export const getHomePageMovieList = async ({ paramKeyword, pageParam }: apiParam
   const res = await axiosInstance.get(`movie/${paramKeyword}?page=${pageParam}`);
   return res.data;
 };
+
+export const getDetailMovie = async (id: string): Promise<any> => {
+  const res = await axiosInstance.get(`movie/${id}`);
+  return res.data;
+};

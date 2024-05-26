@@ -15,12 +15,15 @@ export default CinemaButton;
 
 const variantCSS = {
   primary: css`
-    background-color: ${({ theme }) => theme.COLORS.primary["navy"]};
-    color: ${({ theme }) => theme.COLORS.white};
+    color: ${({ theme }) => theme.COLORS.primary["navy"]};
+    &:hover {
+      color: ${({ theme }) => theme.COLORS.white};
+      border: none;
+      background-color: ${({ theme }) => theme.COLORS.primary["navy"]};
+    }
   `,
-
   secondary: css`
-    background-color: ${({ theme }) => theme.COLORS.primary["purple"]};
+    background-color: ${({ theme }) => theme.COLORS.primary["navy"]};
     color: ${({ theme }) => theme.COLORS.white};
   `,
 };
@@ -37,8 +40,8 @@ const sizeCSS = {
     font-size: ${({ theme }) => theme.FONT_SIZE.medium};
   `,
   large: css`
-    width: 210px;
-    height: 70px;
+    width: 260px;
+    height: 60px;
     font-size: ${({ theme }) => theme.FONT_SIZE.large};
   `,
 };
@@ -60,4 +63,6 @@ const Button = styled.button<ButtonProps>`
   ${({ size }) => sizeCSS[size]}
   ${({ shape }) => shapeCSS[shape]}
   ${flexCenter}
+  border: 3px solid ${({ theme }) => theme.COLORS.primary["navy"]};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
 `;

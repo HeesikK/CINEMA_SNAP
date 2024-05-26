@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { PartialMovie } from "../../../type/movie-type";
+import { useNavigate } from "react-router-dom";
 
-const HomeMovieCard = ({ title, poster_path, release_date }: PartialMovie) => {
+const HomeMovieCard = ({ title, id, poster_path, release_date }: PartialMovie) => {
+  const navigate = useNavigate();
+
   return (
-    <MovieCard>
+    <MovieCard onClick={() => navigate(`/detail/${id}`)}>
       <PosterWrapper>
         <Poster src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
         <Overlay>
