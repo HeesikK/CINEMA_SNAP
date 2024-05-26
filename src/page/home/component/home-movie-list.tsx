@@ -40,7 +40,7 @@ const HomePageMovieList = () => {
           </CategoryHeader>
           <Grid container spacing={2}>
             {movieList.map((movie: PartialMovie) => (
-              <CinemaGrid item xs={6} md={3} key={movie.id}>
+              <CinemaGrid item xs={12} md={3} key={movie.id}>
                 <HomeMovieCard title={movie.title} poster_path={movie.poster_path} release_date={movie.release_date} />
               </CinemaGrid>
             ))}
