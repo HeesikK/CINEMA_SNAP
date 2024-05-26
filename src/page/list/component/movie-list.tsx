@@ -10,7 +10,7 @@ import { QUERY_KEY } from "../../../const/query-key";
 
 const MovieList = () => {
   const param = useParams();
-  let paramKeyword = param.movie || "popular";
+  let paramKeyword = param.movieList || "popular";
   console.log("키워드는?", paramKeyword);
 
   const {
