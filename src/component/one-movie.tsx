@@ -46,6 +46,7 @@ const Wrapper = styled.div`
   width: 230px;
   height: 331px;
   background-size: cover;
+  border-radius: 10px;
   position: relative;
   cursor: pointer;
 
