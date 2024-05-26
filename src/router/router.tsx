@@ -3,7 +3,7 @@ import HomePage from "../page/home";
 import DetailPage from "../page/detail";
 import SearchPage from "../page/search";
 import Layout from "../layout/layout";
-import MovieList from "../page/list/component/movie-list";
+import MovieListPage from "../page/list";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/:movieList",
-        element: <MovieList />,
+        element: <MovieListPage />,
       },
       {
         path: "/:movie/:detail",

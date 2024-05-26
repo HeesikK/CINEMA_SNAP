@@ -1,5 +1,11 @@
+import HomePageMovieList from "./component/home-movie-list";
+
 const HomePage = () => {
-  return <>하이</>;
+  return (
+    <>
+      <HomePageMovieList />
+    </>
+  );
 };
 
 export default HomePage;
