@@ -1,21 +1,22 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo/CINEMA_SNAP_LOGO.png";
 import NavySearchIcon from "../assets/icon/Navy Search.png";
 import CloseIcon from "../assets/icon/Close.png";
 import MenuIcon from "../assets/icon/Menubar.png";
-import React, { useState } from "react";
 import { flexCenter } from "../style/common.style";
 import SearchModal from "./component/search-modal";
 import MobileMenuModal from "./component/mobile-menu";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
-  const navbarItems: string[] = ["Now Playing", "Popular", "Top Rated", "Upcoming"];
+  const navbarItems = ["Now Playing", "Popular", "Top Rated", "Upcoming"];
   const logoIndex = Math.floor(navbarItems.length / 2);
 
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const [isOpenMobileMenu, setIsOpenMobileMenu] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
 
   const openSearchModal = () => {
     setIsOpenMobileMenu(false);
@@ -31,11 +32,26 @@ const Header = () => {
     navigate(`/${category.toLowerCase().replace(/ /g, "_")}`);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <Container>
+    <Container style={{ display: showHeader ? "flex" : "none" }}>
       <Navbar>
         <SearchImg src={isSearchOpen ? CloseIcon : NavySearchIcon} onClick={openSearchModal} />
-        {navbarItems.map((item: string, idx: number) => (
+        {navbarItems.map((item, idx) => (
           <React.Fragment key={idx}>
             {idx === logoIndex && <img onClick={() => navigate("/")} src={Logo} width={140} />}
             <NavItem

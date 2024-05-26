@@ -19,3 +19,13 @@ export const getDetailMovie = async (id: string): Promise<any> => {
   const res = await axiosInstance.get(`movie/${id}`);
   return res.data;
 };
+
+export const getReviewMovie = async (id: string): Promise<any> => {
+  const res = await axiosInstance.get(`movie/${id}/reviews`);
+  return res.data;
+};
+
+export const getSimilarMovie = async (id: string): Promise<any> => {
+  const res = await axiosInstance.get(`movie/${id}/similar?page=1`);
+  return res.data;
+};
