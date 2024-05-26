@@ -59,11 +59,6 @@ const DetailPage = () => {
               {detailMovie?.vote_average}
             </VoteImg>
           </VoteImgBox>
-          {/* <div>
-            {detailMovie?.production_companies.map((item) => (
-              <CompanyLogo style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${item.logo_path})` }}></CompanyLogo>
-            ))}
-          </div> */}
         </div>
         <OverViewBox>
           <OverViewTitle>OverView</OverViewTitle>
@@ -150,12 +145,6 @@ const VoteImg = styled.div`
   border: 2px solid ${({ theme }) => theme.COLORS.primary["navy"]};
   border-radius: 10px;
   margin-bottom: 40px;
-`;
-
-const CompanyLogo = styled.div`
-  width: 36px;
-  height: 36px;
-  background-size: cover;
 `;
 
 const PosterWrapper = styled.div`
