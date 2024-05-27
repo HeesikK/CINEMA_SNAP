@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { flexCenter } from "../../../style/common.style";
 import CloseIcon from "../../../assets/icon/Close.png";
 import React from "react";
 import { useQuery } from "react-query";
