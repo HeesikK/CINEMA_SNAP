@@ -36,6 +36,7 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
       navigate(`/movie/search?keyword=${keyword}`);
       window.scrollTo(0, 0);
     }
+    setIsSearchOpen(false);
   };
 
   return (

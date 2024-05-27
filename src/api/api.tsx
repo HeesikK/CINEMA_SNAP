@@ -1,8 +1,8 @@
 import { axiosInstance } from "./core";
 
 type apiParamProps = {
-  paramKeyword: string;
-  pageParam: number;
+  paramKeyword?: string;
+  pageParam?: number;
 };
 
 export const getTopMovieList = async () => {
@@ -35,7 +35,7 @@ export const getVideoMovie = async (id: string): Promise<any> => {
   return res.data;
 };
 
-export const getSearchMovie = async (keyword: string): Promise<any> => {
-  const res = await axiosInstance.get(`search/movie?query=${keyword}`);
+export const getSearchMovie = async ({ paramKeyword, pageParam = 1 }: apiParamProps): Promise<any> => {
+  const res = await axiosInstance.get(`search/movie?query=${paramKeyword}&page=${pageParam}`);
   return res.data;
 };

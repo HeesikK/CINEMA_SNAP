@@ -1,6 +1,6 @@
 const COLORS = {
   primary: {
-    navy: "#100D45",
+    navy: "#213547",
     yellow: "#fdffeb",
     purple: "#1a1d29",
     logo: "#232054",
