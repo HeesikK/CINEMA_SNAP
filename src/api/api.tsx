@@ -3,6 +3,7 @@ import { axiosInstance } from "./core";
 type apiParamProps = {
   paramKeyword?: string;
   pageParam?: number;
+  id?: string;
 };
 
 export const getTopMovieList = async () => {
@@ -25,8 +26,8 @@ export const getReviewMovie = async (id: string): Promise<any> => {
   return res.data;
 };
 
-export const getSimilarMovie = async (id: string): Promise<any> => {
-  const res = await axiosInstance.get(`movie/${id}/similar?page=1`);
+export const getSimilarMovie = async ({ id, pageParam = 1 }: apiParamProps): Promise<any> => {
+  const res = await axiosInstance.get(`movie/${id}/similar?page=${pageParam}`);
   return res.data;
 };
 

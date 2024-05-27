@@ -7,6 +7,7 @@ import { Movie } from "../../../type/movie-type";
 import { getHomePageMovieList } from "../../../api/api";
 import { useParams } from "react-router-dom";
 import { QUERY_KEY } from "../../../const/query-key";
+import { useCallback, useEffect, useRef } from "react";
 
 const MovieList = () => {
   const param = useParams();
@@ -16,7 +17,6 @@ const MovieList = () => {
   const {
     data: movieList,
     fetchNextPage,
-    isLoading,
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEY.MovieList, paramKeyword],
@@ -30,29 +30,46 @@ const MovieList = () => {
     },
   });
 
-  console.log(movieList);
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const [target] = entries;
+      if (target.isIntersecting && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+    [fetchNextPage, isFetchingNextPage]
+  );
+
+  useEffect(() => {
+    const element = observerRef.current;
+    const option = { root: null, rootMargin: "20px", threshold: 1.0 };
+
+    const observer = new IntersectionObserver(handleObserver, option);
+
+    if (element) observer.observe(element);
+
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, [handleObserver]);
 
   return (
     <CinemaContainer>
-      {isLoading ? (
-        <LoaderContainer>
-          <CircularProgress />
-        </LoaderContainer>
-      ) : (
-        <Grid container spacing={2}>
-          {movieList?.pages.map((page) => {
-            const movieList = page.results;
-            return movieList?.map((movie: Movie) => (
-              <CinemaGrid item xs={6} md={3} key={movie.id}>
-                <OneMovie title={movie.title} id={movie.id} poster_path={movie.poster_path} vote_average={movie.vote_average} overview={movie.overview} adult={movie.adult} />
-              </CinemaGrid>
-            ));
-          })}
-          <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
-            {isFetchingNextPage ? <CircularProgress size={24} /> : "패칭"}
-          </button>
-        </Grid>
-      )}
+      <Grid container spacing={2}>
+        {movieList?.pages.map((page) => {
+          const movieList = page.results;
+          return movieList?.map((movie: Movie) => (
+            <CinemaGrid item xs={6} md={3} key={movie.id}>
+              <OneMovie title={movie.title} id={movie.id} poster_path={movie.poster_path} vote_average={movie.vote_average} overview={movie.overview} adult={movie.adult} />
+            </CinemaGrid>
+          ));
+        })}
+      </Grid>
+      <ObserverDiv ref={observerRef} style={{ height: "20px", marginTop: "20px" }}>
+        {isFetchingNextPage && <CircularProgress size={24} />}
+      </ObserverDiv>
     </CinemaContainer>
   );
 };
@@ -70,8 +87,4 @@ const CinemaGrid = styled(Grid)`
   ${flexCenter}
 `;
 
-const LoaderContainer = styled.div`
-  ${flexCenter}
-  width: 100%;
-  height: 100vh;
-`;
+const ObserverDiv = styled.div``;
