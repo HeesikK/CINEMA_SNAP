@@ -30,6 +30,14 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
     }
   }, [topFiveMovies, hoveredMovie]);
 
+  const onSearchMovie = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      let keyword = (e.target as HTMLInputElement).value;
+      navigate(`/movie/search?keyword=${keyword}`);
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <Container>
       <TopFiveMovieBox>
@@ -53,7 +61,7 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
         </MoviesList>
       </TopFiveMovieBox>
       <SearchBox>
-        <CinemaInput variant="white" size="large" shape="default" />
+        <CinemaInput variant="white" size="large" shape="default" onKeyPress={onSearchMovie} />
         <WhiteSearchImg src={WhiteSearchIcon} />
       </SearchBox>
     </Container>

@@ -1,5 +1,7 @@
+import SearchMovieList from "./component/search-movie-list";
+
 const SearchPage = () => {
-  return <>검색 페이지</>;
+  return <SearchMovieList />;
 };
 
 export default SearchPage;

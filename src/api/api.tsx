@@ -34,3 +34,8 @@ export const getVideoMovie = async (id: string): Promise<any> => {
   const res = await axiosInstance.get(`movie/${id}/videos`);
   return res.data;
 };
+
+export const getSearchMovie = async (keyword: string): Promise<any> => {
+  const res = await axiosInstance.get(`search/movie?query=${keyword}`);
+  return res.data;
+};
