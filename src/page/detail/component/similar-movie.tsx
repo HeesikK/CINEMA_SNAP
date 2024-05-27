@@ -14,8 +14,6 @@ interface DetailMovieProps {
 const SimilarMovie = ({ detail }: DetailMovieProps) => {
   const { data: similarMovieList } = useQuery([QUERY_KEY.SimilarMovie, detail], () => getSimilarMovie(detail));
 
-  console.log(similarMovieList);
-
   return (
     <CinemaContainer>
       <SimilarMovieTitle>Similar Movie</SimilarMovieTitle>

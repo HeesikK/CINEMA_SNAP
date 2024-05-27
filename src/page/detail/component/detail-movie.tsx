@@ -8,12 +8,15 @@ import StarIcon from "../../../assets/icon/star.png";
 import HeartIcon from "../../../assets/icon/heart.png";
 import AllIcon from "../../../assets/icon/ALL.png";
 import NineteenIcon from "../../../assets/icon/19.png";
+import { useState } from "react";
+import MovieTrailerModal from "./trailer-modal";
 
 interface DetailMovieProps {
   detail: string;
 }
 
 const DetailMovie = ({ detail }: DetailMovieProps) => {
+  const [isShowYoutubeModal, setIsShowYoutubeModal] = useState<boolean>(false);
   interface Genre {
     id: number;
     name: string;
@@ -25,47 +28,52 @@ const DetailMovie = ({ detail }: DetailMovieProps) => {
 
   const poster = `https://image.tmdb.org/t/p/original${detailMovie?.poster_path}`;
 
-  console.log(detailMovie);
+  const onShowVideo = () => {
+    setIsShowYoutubeModal(true);
+  };
 
   return (
     <Container>
-      <PosterWrapper>
-        <MoviePoster src={poster} />
-        <CinemaButton variant="primary" size="large" shape="shape">
-          Play Video
-        </CinemaButton>
-      </PosterWrapper>
-      <MovieContentWrapper>
-        <div>
-          <TitleBox>
-            <TeenAdultImg src={detailMovie?.adult ? NineteenIcon : AllIcon} />
-            <MovieTitle>{detailMovie?.title}</MovieTitle>
-          </TitleBox>
-          <SubTitle>{detailMovie?.tagline}</SubTitle>
-          <GenresBox>
-            <ReleaseDate>
-              {detailMovie?.release_date.slice(0, 4)} | {detailMovie?.origin_country[0]}
-            </ReleaseDate>
-            {detailMovie?.genres.map((item: Genre, idx: number) => (
-              <MovieGenres key={idx}>{item.name}</MovieGenres>
-            ))}
-          </GenresBox>
-          <VoteImgBox>
-            <VoteImg>
-              <img src={HeartIcon} width={18} />
-              {detailMovie?.vote_count}
-            </VoteImg>
-            <VoteImg>
-              <img src={StarIcon} width={18} />
-              {Math.ceil(detailMovie?.vote_average * 10) / 10}
-            </VoteImg>
-          </VoteImgBox>
-        </div>
-        <OverViewBox>
-          <OverViewTitle>OverView</OverViewTitle>
-          {detailMovie?.overview}
-        </OverViewBox>
-      </MovieContentWrapper>
+      {isShowYoutubeModal && <MovieTrailerModal detail={detail} setIsShowYoutubeModal={setIsShowYoutubeModal} />}
+      <Wrapper>
+        <PosterWrapper>
+          <MoviePoster src={poster} />
+          <CinemaButton variant="primary" size="large" shape="shape" onClick={onShowVideo}>
+            Play Video
+          </CinemaButton>
+        </PosterWrapper>
+        <MovieContentWrapper>
+          <div>
+            <TitleBox>
+              <TeenAdultImg src={detailMovie?.adult ? NineteenIcon : AllIcon} />
+              <MovieTitle>{detailMovie?.title}</MovieTitle>
+            </TitleBox>
+            <SubTitle>{detailMovie?.tagline}</SubTitle>
+            <GenresBox>
+              <ReleaseDate>
+                {detailMovie?.release_date.slice(0, 4)} | {detailMovie?.origin_country[0]}
+              </ReleaseDate>
+              {detailMovie?.genres.map((item: Genre, idx: number) => (
+                <MovieGenres key={idx}>{item.name}</MovieGenres>
+              ))}
+            </GenresBox>
+            <VoteImgBox>
+              <VoteImg>
+                <img src={HeartIcon} width={18} />
+                {detailMovie?.vote_count}
+              </VoteImg>
+              <VoteImg>
+                <img src={StarIcon} width={18} />
+                {Math.ceil(detailMovie?.vote_average * 10) / 10}
+              </VoteImg>
+            </VoteImgBox>
+          </div>
+          <OverViewBox>
+            <OverViewTitle>OverView</OverViewTitle>
+            {detailMovie?.overview}
+          </OverViewBox>
+        </MovieContentWrapper>
+      </Wrapper>
     </Container>
   );
 };
@@ -73,6 +81,10 @@ const DetailMovie = ({ detail }: DetailMovieProps) => {
 export default DetailMovie;
 
 const Container = styled.div`
+  position: relative;
+`;
+
+const Wrapper = styled.div`
   margin-top: 200px;
   display: flex;
   justify-content: space-evenly;

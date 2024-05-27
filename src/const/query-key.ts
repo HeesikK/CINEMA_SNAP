@@ -4,4 +4,5 @@ export const QUERY_KEY = {
   DetailMovie: "detailMovie",
   SimilarMovie: "similarMovie",
   Review: "review",
+  Video: "video",
 };
