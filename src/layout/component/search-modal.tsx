@@ -35,8 +35,8 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
       let keyword = (e.target as HTMLInputElement).value;
       navigate(`/movie/search?keyword=${keyword}`);
       window.scrollTo(0, 0);
+      setIsSearchOpen(false);
     }
-    setIsSearchOpen(false);
   };
 
   return (
