@@ -30,12 +30,12 @@ const variantCSS = {
 
 const sizeCSS = {
   small: css`
-    width: 150px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     font-size: ${({ theme }) => theme.FONT_SIZE.small};
   `,
   medium: css`
-    width: 180px;
+    width: 160px;
     height: 60px;
     font-size: ${({ theme }) => theme.FONT_SIZE.medium};
   `,
