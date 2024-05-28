@@ -1,8 +1,9 @@
 import { useInfiniteQuery } from "react-query";
-import { Grid, Container, CircularProgress } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common.style";
 import OneMovie from "../../../component/one-movie";
+import OneMovieSkeleton from "../../../component/one-movie-skeleton"; // Import the skeleton component
 import { Movie } from "../../../type/movie-type";
 import { getHomePageMovieList } from "../../../api/api";
 import { useParams } from "react-router-dom";
@@ -68,7 +69,7 @@ const MovieList = () => {
         })}
       </Grid>
       <ObserverDiv ref={observerRef} style={{ height: "20px", marginTop: "20px" }}>
-        {isFetchingNextPage && <CircularProgress size={24} />}
+        {isFetchingNextPage && <OneMovieSkeleton />}
       </ObserverDiv>
     </CinemaContainer>
   );

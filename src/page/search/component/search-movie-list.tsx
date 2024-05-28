@@ -3,11 +3,12 @@ import { QUERY_KEY } from "../../../const/query-key";
 import { getSearchMovie } from "../../../api/api";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { CircularProgress, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { flexCenter } from "../../../style/common.style";
 import OneMovie from "../../../component/one-movie";
 import { PartialMovie } from "../../../type/movie-type";
 import { useCallback, useEffect, useRef } from "react";
+import OneMovieSkeleton from "../../../component/one-movie-skeleton";
 
 const SearchMovieList = () => {
   const [query] = useSearchParams();
@@ -68,7 +69,7 @@ const SearchMovieList = () => {
         })}
       </Grid>
       <ObserverDiv ref={observerRef} style={{ height: "20px", marginTop: "20px" }}>
-        {isFetchingNextPage && <CircularProgress size={24} />}
+        {isFetchingNextPage && <OneMovieSkeleton />}
       </ObserverDiv>
     </CinemaContainer>
   );

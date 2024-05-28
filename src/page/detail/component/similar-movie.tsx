@@ -2,11 +2,12 @@ import { useEffect, useRef, useCallback } from "react";
 import { useInfiniteQuery } from "react-query";
 import { QUERY_KEY } from "../../../const/query-key";
 import { getSimilarMovie } from "../../../api/api";
-import { CircularProgress, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { PartialMovie } from "../../../type/movie-type";
 import OneMovie from "../../../component/one-movie";
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common.style";
+import OneMovieSkeleton from "../../../component/one-movie-skeleton";
 
 interface DetailMovieProps {
   detail: string;
@@ -68,7 +69,7 @@ const SimilarMovie = ({ detail }: DetailMovieProps) => {
         })}
       </Grid>
       <ObserverDiv ref={observerRef} style={{ height: "20px", marginTop: "20px" }}>
-        {isFetchingNextPage && <CircularProgress size={24} />}
+        {isFetchingNextPage && <OneMovieSkeleton />}
       </ObserverDiv>
     </CinemaContainer>
   );
