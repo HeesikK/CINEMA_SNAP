@@ -1,4 +1,3 @@
-import { useInfiniteQuery } from "react-query";
 import { QUERY_KEY } from "../../../const/query-key";
 import { getSearchMovie } from "../../../api/api";
 import { useSearchParams } from "react-router-dom";
@@ -7,20 +6,26 @@ import { Container, Grid } from "@mui/material";
 import { flexCenter } from "../../../style/common.style";
 import OneMovie from "../../../component/one-movie";
 import { PartialMovie } from "../../../type/movie-type";
-import { useCallback, useEffect, useRef } from "react";
 import OneMovieSkeleton from "../../../component/one-movie-skeleton";
+import useInfiniteScrollQuery from "../../../hooks/use-infinite-scroll-query";
 
 const SearchMovieList = () => {
   const [query] = useSearchParams();
-  const paramKeyword = query.get("keyword") || undefined; // paramKeyword undefined 방지!!!
+  const paramKeyword = query.get("keyword") || "";
 
-  const {
-    data: searchMovieList,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: [QUERY_KEY.SearchMovie, paramKeyword],
-    queryFn: ({ pageParam = 1 }) => getSearchMovie({ paramKeyword, pageParam }),
+  const { movieList, observerRef, isFetchingNextPage } = useInfiniteScrollQuery({
+    queryKey: [QUERY_KEY.MovieList, paramKeyword],
+    queryFn: ({ pageParam = 1 }) => {
+      if (paramKeyword) {
+        return getSearchMovie({ paramKeyword, pageParam });
+      } else {
+        return Promise.resolve({
+          page: 0,
+          total_pages: 0,
+          results: [],
+        });
+      }
+    },
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
@@ -30,36 +35,11 @@ const SearchMovieList = () => {
     },
   });
 
-  const observerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const [target] = entries;
-      if (target.isIntersecting && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage, isFetchingNextPage]
-  );
-
-  useEffect(() => {
-    const element = observerRef.current;
-    const option = { root: null, rootMargin: "20px", threshold: 1.0 };
-
-    const observer = new IntersectionObserver(handleObserver, option);
-
-    if (element) observer.observe(element);
-
-    return () => {
-      if (element) observer.unobserve(element);
-    };
-  }, [handleObserver]);
-
   return (
     <CinemaContainer>
       <SearchResult>{`Search "${paramKeyword}"`}</SearchResult>
       <Grid container spacing={2}>
-        {searchMovieList?.pages.map((page) => {
+        {movieList?.pages.map((page) => {
           const movieList = page.results;
           return movieList?.map((movie: PartialMovie) => (
             <CinemaGrid item xs={6} md={3} key={movie.id}>

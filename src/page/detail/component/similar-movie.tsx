@@ -1,5 +1,3 @@
-import { useEffect, useRef, useCallback } from "react";
-import { useInfiniteQuery } from "react-query";
 import { QUERY_KEY } from "../../../const/query-key";
 import { getSimilarMovie } from "../../../api/api";
 import { Container, Grid } from "@mui/material";
@@ -8,19 +6,18 @@ import OneMovie from "../../../component/one-movie";
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common.style";
 import OneMovieSkeleton from "../../../component/one-movie-skeleton";
+import useInfiniteScrollQuery from "../../../hooks/use-infinite-scroll-query";
 
 interface DetailMovieProps {
   detail: string;
 }
 
 const SimilarMovie = ({ detail }: DetailMovieProps) => {
-  const {
-    data: similarMovieList,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: [QUERY_KEY.SimilarMovie, detail],
-    queryFn: ({ pageParam = 1 }) => getSimilarMovie({ id: detail, pageParam }),
+  const id = Number(detail); // detail을 number 타입으로 변환
+
+  const { movieList, observerRef, isFetchingNextPage } = useInfiniteScrollQuery({
+    queryKey: [QUERY_KEY.SimilarMovie, id],
+    queryFn: ({ pageParam = 1 }) => getSimilarMovie({ id: id, pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
@@ -30,36 +27,11 @@ const SimilarMovie = ({ detail }: DetailMovieProps) => {
     },
   });
 
-  const observerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const [target] = entries;
-      if (target.isIntersecting && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage, isFetchingNextPage]
-  );
-
-  useEffect(() => {
-    const element = observerRef.current;
-    const option = { root: null, rootMargin: "20px", threshold: 1.0 };
-
-    const observer = new IntersectionObserver(handleObserver, option);
-
-    if (element) observer.observe(element);
-
-    return () => {
-      if (element) observer.unobserve(element);
-    };
-  }, [handleObserver]);
-
   return (
     <CinemaContainer>
       <SimilarMovieTitle>Similar Movie</SimilarMovieTitle>
       <Grid container spacing={2}>
-        {similarMovieList?.pages.map((page) => {
+        {movieList?.pages.map((page) => {
           const movieList = page.results;
           return movieList?.map((movie: PartialMovie) => (
             <CinemaGrid item xs={6} md={3} key={movie.id}>
