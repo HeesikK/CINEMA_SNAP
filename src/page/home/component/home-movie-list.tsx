@@ -16,7 +16,7 @@ const HomePageMovieList = () => {
       .join(" ");
   });
   const navigate = useNavigate();
-  const [allMovies, setAllMovies] = useState([[], [], [], []]);
+  const [allMovies, setAllMovies] = useState<PartialMovie[][]>([[], [], [], []]);
 
   useEffect(() => {
     const fetchAllMovies = async () => {
