@@ -40,3 +40,16 @@ export type ModalProps = {
   detail: string;
   setIsShowYoutubeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type MobileMenuModalProps = {
+  navbarItems: string[];
+  setIsOpenMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type searchModalProps = {
+  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type MovieListResponse = {
+  results: PartialMovie[];
+};

@@ -7,15 +7,8 @@ import { getTopMovieList } from "../../api/api";
 import { flexCenter } from "../../style/common.style";
 import { useNavigate } from "react-router-dom";
 import { QUERY_KEY } from "../../const/query-key";
-import { PartialMovie } from "../../type/movie-type";
-
-type searchModalProps = {
-  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type MovieListResponse = {
-  results: PartialMovie[];
-};
+import { MovieListResponse, PartialMovie, searchModalProps } from "../../type/movie-type";
+import { URL } from "../../const/url";
 
 const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
   const { data: movieList } = useQuery<MovieListResponse>([QUERY_KEY.TopFiveMovieList], getTopMovieList);
@@ -42,7 +35,7 @@ const SearchModal = ({ setIsSearchOpen }: searchModalProps) => {
   return (
     <Container>
       <TopFiveMovieBox>
-        <MoviePoster>{hoveredMovie && <img src={`https://image.tmdb.org/t/p/original${hoveredMovie.poster_path}`} alt={hoveredMovie.title} />}</MoviePoster>
+        <MoviePoster>{hoveredMovie && <img src={`${URL.posterURL + hoveredMovie.poster_path}`} alt={hoveredMovie.title} />}</MoviePoster>
         <MoviesList>
           {topFiveMovies.map((movie: PartialMovie, index: number) => (
             <MovieItem key={movie.id} onMouseEnter={() => setHoveredMovie(movie)} onMouseLeave={() => setHoveredMovie(topFiveMovies[0])}>

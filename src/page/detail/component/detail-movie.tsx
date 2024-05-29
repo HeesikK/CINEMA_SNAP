@@ -11,6 +11,7 @@ import NineteenIcon from "../../../assets/icon/19.png";
 import { useState } from "react";
 import MovieTrailerModal from "./trailer-modal";
 import { DetailMovieProps, Genre } from "../../../type/movie-type";
+import { URL } from "../../../const/url";
 
 const DetailMovie = ({ detail }: DetailMovieProps) => {
   const [isShowYoutubeModal, setIsShowYoutubeModal] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const DetailMovie = ({ detail }: DetailMovieProps) => {
     enabled: !!detail, // detail 값이 있을 때만 쿼리를 실행 => undefined error 방지!!!
   });
 
-  const poster = `https://image.tmdb.org/t/p/original${detailMovie?.poster_path}`;
+  const poster = `${URL.posterURL + detailMovie?.poster_path}`;
 
   const onShowVideo = () => {
     setIsShowYoutubeModal(true);

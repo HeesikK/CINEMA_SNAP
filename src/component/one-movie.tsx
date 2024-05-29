@@ -5,10 +5,11 @@ import AllIcon from "../assets/icon/ALL.png";
 import NineteenIcon from "../assets/icon/19.png";
 import { useNavigate } from "react-router-dom";
 import { PartialMovie } from "../type/movie-type";
+import { URL } from "../const/url";
 
 const OneMovie: FC<PartialMovie> = ({ title, id, poster_path, vote_average, overview, adult }) => {
   const navigate = useNavigate();
-  const moviePoster = `https://image.tmdb.org/t/p/original${poster_path}`;
+  const moviePoster = `${URL.posterURL + poster_path}`;
 
   const goToDetailPage = () => {
     navigate(`/detail/${id}`);

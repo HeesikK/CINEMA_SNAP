@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Scrollbar } from "swiper/modules";
 import { QUERY_KEY } from "../../../const/query-key";
 import { getHomePageMovieList } from "../../../api/api";
+import { URL } from "../../../const/url";
 
 const Banner = () => {
   const { data: bannerMovieList } = useQuery([QUERY_KEY.MovieList], () => getHomePageMovieList({ paramKeyword: "popular", pageParam: 1 }));
@@ -14,7 +15,7 @@ const Banner = () => {
     <CinemaSwiper scrollbar={{ hide: true }} modules={[Scrollbar]}>
       {bannerMovieList?.results.map((movie) => (
         <CinemaSwiperSlide key={movie.id}>
-          <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
+          <img src={`${URL.posterURL + movie.backdrop_path}`} alt={movie.title} />
         </CinemaSwiperSlide>
       ))}
     </CinemaSwiper>

@@ -1,11 +1,8 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import { MobileMenuModalProps } from "../../type/movie-type";
 
-type MobileMenuModalProps = {
-  navbarItems: string[];
-  setIsOpenMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
-};
 const MobileMenuModal: FC<MobileMenuModalProps> = ({ navbarItems, setIsOpenMobileMenu }) => {
   const navigate = useNavigate();
 
