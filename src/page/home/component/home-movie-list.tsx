@@ -52,7 +52,6 @@ const HomePageMovieList = () => {
 export default HomePageMovieList;
 
 const CinemaContainer = styled(Container)`
-  margin-top: 160px;
   ${flexCenter}
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.white};

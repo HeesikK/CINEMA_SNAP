@@ -11,6 +11,7 @@ export type Movie = {
   vote_average: number;
   vote_count: number;
   adult: boolean;
+  backdrop_path: string;
 };
 
 export type PartialMovie = Partial<Movie>;
