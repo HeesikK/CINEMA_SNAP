@@ -1,14 +1,25 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 type MobileMenuModalProps = {
   navbarItems: string[];
+  setIsOpenMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const MobileMenuModal: FC<MobileMenuModalProps> = ({ navbarItems }) => {
+const MobileMenuModal: FC<MobileMenuModalProps> = ({ navbarItems, setIsOpenMobileMenu }) => {
+  const navigate = useNavigate();
+
+  const goMovieCategory = (category: string) => {
+    navigate(`/${category.toLowerCase().replace(/ /g, "_")}`);
+    setIsOpenMobileMenu(false);
+  };
+
   return (
     <Container>
       {navbarItems.map((item, idx) => (
-        <MenuItem key={idx}>{item}</MenuItem>
+        <MenuItem key={idx} onClick={() => goMovieCategory(item)}>
+          {item}
+        </MenuItem>
       ))}
     </Container>
   );

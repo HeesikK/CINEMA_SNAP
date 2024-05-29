@@ -68,7 +68,7 @@ const Header = () => {
         <MenuImg src={MenuIcon} onClick={openMenu} />
       </Navbar>
       {isSearchOpen && <SearchModal setIsSearchOpen={setIsSearchOpen} />}
-      {isOpenMobileMenu && <MobileMenuModal navbarItems={navbarItems} />}
+      {isOpenMobileMenu && <MobileMenuModal navbarItems={navbarItems} setIsOpenMobileMenu={setIsOpenMobileMenu} />}
     </Container>
   );
 };

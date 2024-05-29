@@ -14,6 +14,8 @@ const MovieList = () => {
   let paramKeyword = param.movieList || "popular";
   console.log("키워드는?", paramKeyword);
 
+  const categoryTitle = paramKeyword.replace(/_/g, " ").toUpperCase();
+
   const { movieList, observerRef, isFetchingNextPage } = useInfiniteScrollQuery({
     queryKey: [QUERY_KEY.MovieList, paramKeyword],
     queryFn: ({ pageParam = 1 }) => getHomePageMovieList({ paramKeyword, pageParam }),
@@ -28,6 +30,9 @@ const MovieList = () => {
 
   return (
     <CinemaContainer>
+      <MovieTitle>
+        <span>{categoryTitle}</span>
+      </MovieTitle>
       <Grid container spacing={2}>
         {movieList?.pages.map((page) => {
           const movieList = page.results;
@@ -48,10 +53,46 @@ const MovieList = () => {
 export default MovieList;
 
 const CinemaContainer = styled(Container)`
-  margin-top: 160px;
+  margin-top: 180px;
   ${flexCenter}
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.white};
+`;
+
+const MovieTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  font-weight: 900;
+  color: #333;
+  margin: 50px 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    border-top: 4px solid #333;
+    top: calc(50% - 6px);
+  }
+
+  &::after {
+    border-top: 4px solid #333;
+    top: calc(50% + 6px);
+  }
+
+  span {
+    padding: 0 20px;
+    background: white;
+    z-index: 1;
+  }
 `;
 
 const CinemaGrid = styled(Grid)`

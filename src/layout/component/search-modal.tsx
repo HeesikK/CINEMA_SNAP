@@ -91,11 +91,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    height: 150px;
+  }
 `;
 
 const TopFiveMovieBox = styled.div`
   ${flexCenter}
   padding-left: 170px;
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    display: none;
+  }
 `;
 
 const MoviePoster = styled.div`
