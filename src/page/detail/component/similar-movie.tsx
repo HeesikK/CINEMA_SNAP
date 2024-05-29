@@ -1,16 +1,12 @@
 import { QUERY_KEY } from "../../../const/query-key";
 import { getSimilarMovie } from "../../../api/api";
 import { Container, Grid } from "@mui/material";
-import { PartialMovie } from "../../../type/movie-type";
+import { DetailMovieProps, PartialMovie } from "../../../type/movie-type";
 import OneMovie from "../../../component/one-movie";
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common.style";
 import OneMovieSkeleton from "../../../component/one-movie-skeleton";
 import useInfiniteScrollQuery from "../../../hooks/use-infinite-scroll-query";
-
-interface DetailMovieProps {
-  detail: string;
-}
 
 const SimilarMovie = ({ detail }: DetailMovieProps) => {
   const id = Number(detail); // detail을 number 타입으로 변환

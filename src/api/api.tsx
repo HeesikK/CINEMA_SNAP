@@ -1,11 +1,5 @@
-import { PartialMovie } from "../type/movie-type";
+import { ApiResponse } from "../type/api-type";
 import { axiosInstance } from "./core";
-
-export interface ApiResponse {
-  page: number;
-  total_pages: number;
-  results: PartialMovie[];
-}
 
 export const getTopMovieList = async () => {
   const res = await axiosInstance.get(`movie/popular`);

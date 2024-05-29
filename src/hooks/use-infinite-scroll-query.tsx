@@ -1,6 +1,6 @@
 import { useInfiniteQuery, UseInfiniteQueryResult } from "react-query";
 import { useEffect, useRef, useCallback } from "react";
-import { ApiResponse } from "../api/api";
+import { ApiResponse } from "../type/api-type";
 
 const useInfiniteScrollQuery = ({
   queryKey,

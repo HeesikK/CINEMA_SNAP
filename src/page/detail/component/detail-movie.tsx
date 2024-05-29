@@ -10,17 +10,10 @@ import AllIcon from "../../../assets/icon/ALL.png";
 import NineteenIcon from "../../../assets/icon/19.png";
 import { useState } from "react";
 import MovieTrailerModal from "./trailer-modal";
-
-interface DetailMovieProps {
-  detail: string;
-}
+import { DetailMovieProps, Genre } from "../../../type/movie-type";
 
 const DetailMovie = ({ detail }: DetailMovieProps) => {
   const [isShowYoutubeModal, setIsShowYoutubeModal] = useState<boolean>(false);
-  interface Genre {
-    id: number;
-    name: string;
-  }
 
   const { data: detailMovie } = useQuery([QUERY_KEY.DetailMovie, detail], () => getDetailMovie(detail!), {
     enabled: !!detail, // detail 값이 있을 때만 쿼리를 실행 => undefined error 방지!!!

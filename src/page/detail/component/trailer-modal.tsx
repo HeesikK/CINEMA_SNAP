@@ -1,16 +1,11 @@
 import styled from "styled-components";
 import CloseIcon from "../../../assets/icon/Close.png";
-import React from "react";
 import { useQuery } from "react-query";
 import { QUERY_KEY } from "../../../const/query-key";
 import { getVideoMovie } from "../../../api/api";
 import YouTube from "react-youtube";
 import { Container } from "@mui/material";
-
-type ModalProps = {
-  detail: string;
-  setIsShowYoutubeModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { ModalProps } from "../../../type/movie-type";
 
 const MovieTrailerModal = ({ detail, setIsShowYoutubeModal }: ModalProps) => {
   const { data: movieVideo } = useQuery([QUERY_KEY.Video, detail], () => getVideoMovie(detail));

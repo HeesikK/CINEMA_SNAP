@@ -5,19 +5,7 @@ import { Container } from "@mui/material";
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common.style";
 import { QUERY_KEY } from "../../../const/query-key";
-
-interface DetailMovieProps {
-  detail: string;
-}
-
-interface Review {
-  author: string;
-  content: string;
-}
-
-interface ReviewData {
-  results: Review[];
-}
+import { DetailMovieProps, ReviewData } from "../../../type/movie-type";
 
 const Review: React.FC<DetailMovieProps> = ({ detail }) => {
   const [isShowReview, setIsShowReview] = useState(false);
